@@ -1,12 +1,11 @@
 # Windows-DNS-RES-API
 
 
-WEB rozhranie pre pridavanie a odoberanie DNS zaznamov vo windows prostredi. 
+Web Interface for Adding and Removing DNS Records in a Windows Environment
 
-Program je napisany pomocou python a flask kniznice
+The program is written using Python and the Flask library.
 
-
-Instalacia:
+Instalation:
 
 1. Priprava operacneho systemu:
 
@@ -41,7 +40,7 @@ Instalacia:
 
 ```pip install flask pywinrm```
 
-#Spustenie programu:
+#program run:
 
 ```python dns_api.py```
 
@@ -67,25 +66,25 @@ Instalacia:
 
 
 
-Testovanie programu:
+#Testing:
 
 
-1. Vytvorenie DNS zaznamu A:
+1. Create DNS record A:
 
 ```curl -X POST -H "Content-Type: application/json" -d '{"name": "test", "type": "A", "value": "192.168.1.1"}' http://localhost:5000/dns/add ```
 
 
-2. Zmazanie DNS zaznamu A:
+2. Delete DNS record A:
 
 ``` curl -X POST -H "Content-Type: application/json" -d '{"name": "test", "type": "A"}' http://localhost:5000/dns/delete ```
 
 
 
-3. Vytvorenie PTR zaznamu:
+3. create PTR record:
 
 ```curl -X POST -H "Content-Type: application/json" -d '{"name": "test", "type": "A", "value": "192.168.1.1"}' http://localhost:5000/dns/add ```
 
 
-4. Zmazanie zaznamu PTR:
+4. delete DNS record PTR:
 
 ```curl -X POST -H "Content-Type: application/json" -d '{"name": "test", "type": "A"}' http://localhost:5000/dns/delete ```
