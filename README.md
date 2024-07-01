@@ -7,7 +7,7 @@ The program is written using Python and the Flask library.
 
 Instalation:
 
-1. Priprava operacneho systemu:
+1. Operating system prepare:
 
 ```Install-WindowsFeature -Name "WindowsPowerShellWebAccess"```
 
@@ -53,6 +53,9 @@ Instalation:
 
 ```python flask_service.py start```
 
+```sc config FlaskDNSService start= auto```
+
+#remove
 
 ```python flask_service.py stop```
 
