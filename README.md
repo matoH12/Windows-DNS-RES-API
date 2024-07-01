@@ -1,6 +1,5 @@
 # Windows-DNS-RES-API
 
-# virtual.cloud-API
 
 WEB rozhranie pre pridavanie a odoberanie DNS zaznamov vo windows prostredi. 
 
@@ -45,6 +44,24 @@ Instalacia:
 #Spustenie programu:
 
 ```python dns_api.py```
+
+
+#Install to windows services 
+
+```pip install pywin32```
+
+```python flask_service.py install```
+
+```python flask_service.py start```
+
+
+```python flask_service.py stop```
+
+```python flask_service.py remove```
+
+
+
+
 
 
 
