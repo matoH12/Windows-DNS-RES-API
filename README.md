@@ -85,9 +85,11 @@ Instalation:
 
 3. create PTR record:
 
-```curl -X POST -H "Content-Type: application/json" -d '{"name": "test", "type": "A", "value": "192.168.1.1"}' http://localhost:5000/dns/add ```
+```curl -X POST -H "Content-Type: application/json" -d '{"ip": "192.168.204.10", "ptr_name": "example.yourdomain.com"}' http://localhost:5000/dns/add_ptr
+```
 
 
 4. delete DNS record PTR:
 
-```curl -X POST -H "Content-Type: application/json" -d '{"name": "test", "type": "A"}' http://localhost:5000/dns/delete ```
+```curl -X POST -H "Content-Type: application/json" -d '{"ip": "192.168.204.10"}' http://localhost:5000/dns/delete_ptr
+```
