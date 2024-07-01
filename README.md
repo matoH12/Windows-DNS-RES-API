@@ -90,5 +90,4 @@ Instalation:
 
 4. delete DNS record PTR:
 
-```curl -X POST -H "Content-Type: application/json" -d "{\"ip\": \"147.232.204.10\"}" http://localhost:5000/dns/delete_ptr
-```
+```curl -X POST -H "Content-Type: application/json" -d "{\"ip\": \"147.232.204.10\"}" http://localhost:5000/dns/delete_ptr```
