@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Replace with your Windows DNS server details
 DNS_SERVER = 'localhost'
 USERNAME = 'Administrator'
-PASSWORD = 'Jahod@'
+PASSWORD = 'password'
 
 # Function to execute PowerShell command on remote Windows server
 def run_powershell_command(command):
