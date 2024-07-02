@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Replace with your Windows DNS server details
 DNS_SERVER = 'localhost'
 USERNAME = 'Administrator'
-PASSWORD = 'admin'
+PASSWORD = 'Jahod@'
 
 # Function to execute PowerShell command on remote Windows server
 def run_powershell_command(command):
@@ -16,6 +16,23 @@ def run_powershell_command(command):
         return result.std_out.decode()
     else:
         raise Exception(result.std_err.decode())
+    
+def create_ptr_zone(ip_address: str) -> str:
+    # Split the IP address into its components
+    ip_parts = ip_address.split('.')
+
+    # Remove the last octet
+    ip_parts = ip_parts[:-1]
+
+    # Reverse the remaining parts
+    reversed_ip_parts = ip_parts[::-1]
+
+    # Join the reversed parts with dots and add the in-addr.arpa suffix
+    ptr_zone = '.'.join(reversed_ip_parts) + '.in-addr.arpa'
+
+    return ptr_zone
+
+
 
 @app.route('/dns/add', methods=['POST'])
 def add_record():
@@ -54,11 +71,12 @@ def add_ptr_record():
         data = request.json
         ip_address = data.get('ip')
         ptr_name = data.get('ptr_name')
+        ptr_zone = create_ptr_zone(ip_address)
 
         # Convert IP address to PTR record format
         reversed_ip = '.'.join(reversed(ip_address.split('.'))) + '.in-addr.arpa'
         
-        command = f"Add-DnsServerResourceRecordPtr -ZoneName '204.232.147.in-addr.arpa' -Name '{reversed_ip}' -PtrDomainName '{ptr_name}'"
+        command = f"Add-DnsServerResourceRecordPtr -ZoneName '{ptr_zone}' -Name '{reversed_ip}' -PtrDomainName '{ptr_name}'"
         response = run_powershell_command(command)
         
         return jsonify({'status': 'success', 'response': response}), 200
@@ -70,11 +88,12 @@ def delete_ptr_record():
     try:
         data = request.json
         ip_address = data.get('ip')
+        ptr_zone = create_ptr_zone(ip_address)
 
         # Convert IP address to PTR record format
         reversed_ip = '.'.join(reversed(ip_address.split('.'))) + '.in-addr.arpa'
         
-        command = f"Remove-DnsServerResourceRecord -ZoneName '204.232.147.in-addr.arpa' -Name '{reversed_ip}' -RRType 'PTR' -Force"
+        command = f"Remove-DnsServerResourceRecord -ZoneName '{ptr_zone}' -Name '{reversed_ip}' -RRType 'PTR' -Force"
         response = run_powershell_command(command)
         
         return jsonify({'status': 'success', 'response': response}), 200
